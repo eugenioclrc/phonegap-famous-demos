@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>famo.us App</title>
+        <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/ratchet-theme-android.min.css" />
+        
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+
+<div class="app-page" data-page="home">
+    <header class="bar bar-nav">
+      <h1 class="title">Famo.us Examples</h1>
+    </header>
+
+    <ul class="table-view" style="padding-top:50px">
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["core"]'>
+          <span class="badge">7</span>
+          Core
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["events"]'>
+          <span class="badge">4</span>
+          Events
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["views"]'>
+          <span class="badge">5</span>
+          Views
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["inputs"]'>
+          <span class="badge">12</span>
+          Inputs
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["math"]'>
+          <span class="badge">4</span>
+          Math
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["modifiers"]'>
+          <span class="badge">2</span>
+          Modifiers
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["surfaces"]'>
+          <span class="badge">3</span>
+          Surfaces
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["transitions"]'>
+          <span class="badge">7</span>
+          Transitions
+        </a>
+      </li>
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["utilities"]'>
+          <span class="badge">7</span>
+          Utilities
+        </a>
+      </li>
+
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="list" data-target-args='["views"]'>
+          <span class="badge">7</span>
+          Views
+        </a>
+      </li>
+    </ul>
+
+</div>
+
+
+<div class="app-page" data-page="list">
+    <header class="bar bar-nav">
+      <a class="icon icon-left-nav pull-left app-button" data-back data-transition="slide-out"></a>
+      <h1 class="title app-button" data-back data-transition="slide-out"></h1>
+    </header>
+
+    <ul class="table-view" style="padding-top:50px">
+      
+    </ul>
+</div>
+
+
+<script type="text/javascript" src="examplesjson.js"></script>
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript" src="kik.app.js"></script>
+
+<script type="text/javascript">
+App.setDefaultTransition('slide-left'); // global
+
+Object.keys(examplesList).forEach(function(cat){
+    if(examplesList.hasOwnProperty(cat)){
+        examplesList[cat]._total = 0;
+        Object.keys(examplesList[cat]).forEach(function(subcat){            
+            if (subcat !== '_total') {
+                examplesList[cat]._total += examplesList[cat][subcat].length;
+            }
+        });
+    }
+});
+
+
+function onDeviceReady(){
+    document.addEventListener("backbutton", function(e){
+      try{
+        e.preventDefault();
+        if(App.back() === false){
+          navigator.app.exitApp();
+        }else{
+          navigator.app.backHistory();
+        }
+      }catch(er){
+        navigator.app.backHistory();
+      }
+      
+    });
+}
+document.addEventListener("deviceready", onDeviceReady, false);
+
+App.controller('home', function (page) {
+});
+
+App.controller('list', function (page, path) {
+    var $page = $(page);
+    $page.find('header h1').html('Famo.us '+path.join(' ') +' Examples');
+
+    // cat view
+    var html='';
+    if(path.length === 1) {
+        var keys = Object.keys(examplesList[path[0]]);
+        for(var i=0,e;i< keys.length; i++){
+            e=keys[i];
+            if (e!=='_total') {
+                if(examplesList[path[0]][e].length>1){
+                    html +=
+                      '<li class="table-view-cell">'+
+                      '  <a class="navigate-right app-button" data-target="list" data-target-args=\'["' + path[0] + '","' + e + '"]\'>' +
+                      '    <span class="badge">'+ examplesList[path[0]][e].length+'</span>    ' + e
+                      '  </a>'+
+                      '</li>';
+                } else {
+                    html +=
+                      '<li class="table-view-cell">'+
+                      '  <a class="navigate-right" data-transition="slide-in" href="demo.html?src='+ examplesList[path[0]][e][0].url +'">' +
+                         e +
+                      '  </a>' +
+                      '</li>';
+                }
+            }
+            
+        };
+    } else {
+        var keys = Object.keys(examplesList[path[0]][path[1]]);
+        for(var i=0,e;i< keys.length; i++){
+          e=keys[i];
+            html +=
+                      '<li class="table-view-cell">'+
+                      '  <a class="navigate-right app-button" href="demo.html?src='+ examplesList[path[0]][path[1]][e].url +'">' +
+                         examplesList[path[0]][path[1]][e].name +
+                      '  </a>' +
+                      '</li>';                      
+        }
+    }
+
+    $page.find('ul').html(html);
+
+    bindClickable($page.find('ul .app-button'));
+        
+});
+
+$(function(){
+  try {
+      App.restore();
+  } catch (err) {
+      App.load('home');
+  }
+});
+
+function bindClickable(t){
+     t.forEach(
+            function (button) {
+                Clickable(button);
+                button.addEventListener('click', function () {
+                    var target     = button.getAttribute('data-target'),
+                        targetArgs = button.getAttribute('data-target-args'),
+                        back       = (button.getAttribute('data-back') !== null),
+                        manualBack = (button.getAttribute('data-manual-back') !== null),
+                        args;
+
+                    try {
+                        args = JSON.parse(targetArgs);
+                    } catch (err) {}
+                    if ((typeof args !== 'object') || (args === null)) {
+                        args = {};
+                    }
+
+                    if (!back && !target) {
+                        return;
+                    }
+                    if (back && manualBack) {
+                        return;
+                    }
+
+                    var clickableClass = button.getAttribute('data-clickable-class');
+                    if (clickableClass) {
+                        button.disabled = true;
+                        button.classList.add(clickableClass);
+                    }
+
+                    if (back) {
+                        App.back(finish);
+                    }
+                    else if (target) {
+                        App.load(target, args, {}, finish);
+                    }
+
+                    function finish () {
+                        if (clickableClass) {
+                            button.disabled = false;
+                            button.classList.remove(clickableClass);
+                        }
+                    }
+                }, false);
+            }
+        );
+
+}
+
+</script>
+
+    </body>
+</html>
