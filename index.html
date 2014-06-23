@@ -27,7 +27,13 @@
       <h1 class="title">Famo.us Examples</h1>
     </header>
 
+
     <ul class="table-view" style="padding-top:50px">
+      <li class="table-view-cell">
+        <a class="navigate-right app-button" data-target="about">
+          About
+        </a>
+      </li>
       <li class="table-view-cell">
         <a class="navigate-right app-button" data-target="list" data-target-args='["core"]'>
           <span class="badge">7</span>
@@ -93,6 +99,36 @@
 
 </div>
 
+
+
+<div class="app-page" data-page="about">
+    <header class="bar bar-nav">
+      <a class="icon icon-left-nav pull-left app-button" data-back data-transition="slide-out"></a>
+      <h1 class="title app-button" data-back data-transition="slide-out">About</h1>
+    </header>
+    <div class="content">
+      <div class="card">
+        <ul class="table-view">
+          <li class="table-view-cell media" style="padding: 11px">
+            Built from github.com/Famous/examples
+          </li>
+          <li class="table-view-cell media" style="padding: 11px">
+            Famous version 
+            <span class="pull-right">v0.2.1</span>
+          </li>
+          <li class="table-view-cell media" style="padding: 11px">
+            Twitter
+            <span class="pull-right">@eugenioclrc</span>
+          </li>
+          <li class="table-view-cell media" style="padding: 11px">
+            Github
+            <span class="pull-right">/eugenioclrc/</span>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+</div>
 
 <div class="app-page" data-page="list">
     <header class="bar bar-nav">
