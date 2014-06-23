@@ -1,3 +1,13 @@
+## PlayStore APK ##
+
+
+## Online demo ##
+
+[http://eugenioclrc.github.io/phonegap-famous-demos](http://eugenioclrc.github.io/phonegap-famous-demos)
+
+
+
+
 To sign apk;
 
 keytool -genkey -v -keystore famousapp.keystore -alias FamousDemos -keyalg RSA -keysize 2048 -validity 10000
