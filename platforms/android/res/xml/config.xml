@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.juje.famousdemo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
+    <feature name="App">
+        <param name="android-package" value="org.apache.cordova.App" />
+    </feature>
+    <name>Famo.us Demos</name>
+    <description>
+        All famous demos wrapped in a phonegap app
+    </description>
+    <author email="eugenioclrc@gmail.com" href="http://twitter.com/eugenioclrc">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <icon density="mdpi" height="54" platform="android" src="www/icon.png" width="54" />
+</widget>
